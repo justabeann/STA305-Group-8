@@ -71,10 +71,16 @@ Therefore, there is insufficient evidence that popcorn yield by kernel types var
   $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
   $+ \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + e_{i}$
 
-### Hypothesis:
+### Hypothesis for Kernel Type
 $H_{0}:\beta_{1}=\beta_{2}=\beta_{3}=0$
   
 $H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=1,2,3$
+
+### Hypothesis for Oil Type
+$H_{0}:\beta_{4}=\beta_{5}=0$
+  
+$H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=4,5$
+
 ```{r}
 model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
 anova(model_2)
