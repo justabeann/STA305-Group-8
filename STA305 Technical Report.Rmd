@@ -16,12 +16,12 @@ library(readxl)
 library(BDEsize)
 ```
 
-## Objective (Question of Interest)
+# Objective (Question of Interest)
 * Which kernel type yields the most popcorn controlling the oil type?
 * Which oil type yields the most popcorn controlling the kernel type?
 * Does the yield of popcorn by kernel type vary depending on the oil used?
 
-## Variables
+# Variables
 Predictor variables:
   Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
   Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
@@ -29,7 +29,7 @@ Response variable:
   Yield of popcorn kernels (measured by number of popped kernels)
 Blocking variable: Pot size (small, medium, large)
 
-#### Load the data
+## Load the data
 ```{r}
 pop_data <- read_excel("STA305_FinalProjectData.xlsx")
 attach(pop_data)
