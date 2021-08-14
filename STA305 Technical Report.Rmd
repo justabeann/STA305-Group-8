@@ -116,7 +116,7 @@ Since p-value is larger than our alpha, significance level, we fail to reject $H
 * Heterogeneity between blocks  (checked by the nature of our design)
 * Homogeneity of variance between treatment (e.g. residual versus fit plot) 
 
-```{r}
+```{r, out.width="70%", fig.align='center'}
 par(mfrow=c(2,2))
 
 plot(model_1, 2) #normality of model 1
