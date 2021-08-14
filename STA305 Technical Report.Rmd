@@ -52,7 +52,7 @@ Every treatment combination is possible, there are 9 observations in each treatm
 
 ### ANOVA
 ```{r}
-model_1 <- lm(NUM_POPPED~POT+ KERNEL*OIL)
+model_1 <- lm(NUM_POPPED~POT + KERNEL*OIL)
 anova(model_1)
 
 model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
