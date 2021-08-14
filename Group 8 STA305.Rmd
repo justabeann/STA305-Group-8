@@ -1,0 +1,50 @@
+---
+title: "Predictors of Feelings About Life in Canada"
+subtitle: " "
+author: "Justin Lee 1004206165"
+date: 2021-06-19
+lang: "en"
+output:
+  pdf_document:
+    template: report.tex
+    toc: true
+    toc_depth: 2
+titlepage: true
+titlepage-color: "1D519B"
+titlepage-text-color: "FFFFFF"
+titlepage-rule-color: "FFFFFF"
+titlepage-rule-height: 2
+---
+
+```{r, message = FALSE, echo=FALSE}
+library(tidyverse)
+library(openintro)
+
+#knitr::opts_chunk$set(include=FALSE)
+```
+
+\newpage
+
+# Abstract
+ 
+
+# Introduction
+
+# Data
+
+
+
+# Methods
+
+
+
+
+
+
+
+
+# Conclusions
+
+
+
+\newpage
