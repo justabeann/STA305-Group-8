@@ -36,13 +36,13 @@ attach(pop_data)
 
 table(OIL,KERNEL)
 ```
+Every treatment combination is possible, there are 9 observations in each treatment level, so this is a completed and balanced design, with crossed factor.
+
 
 ## Sample Size Calculations
 ```{r}
 Size.Block(factor.lev=c(3, 4), interaction=TRUE, delta_type=1, delta=c(1, 1, 1), alpha=0.05, beta=0.2)
 ```
-
-Every treatment combination is possible, there are 9 observations in each treatment level, so this is a completed and balanced design, with crossed factor.
 
 ## Model 1: Interaction and main effect model
   $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
@@ -83,6 +83,13 @@ anova(model_2)
 * Heterogeneity between blocks  (checked by the nature of our design)
 * Homogeneity of variance between treatment (e.g. residual versus fit plot) 
 
+```{r}
+plot(model_1, 2) #normality of model 1
+plot(model_2, 2) #normality of model 2
+
+plot(model_1,1) #homogeneity of variance model 1
+plot(model_2,1) #homogeneity of variance model 2
+```
 
 
 
