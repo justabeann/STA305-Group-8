@@ -101,12 +101,12 @@ $p= P (F_{3,100}>F)= 8.058e-10 < 0.05$
 $F= MSoil/MSE = 1.110075$~$F_{2,100}$
 $p= P (F_{2,100}>F)= 0.3336> 0.05$
 
-
-
 ## Conclusion
+
 ### Kernel Effect
-We have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil
+Since p-value is smaller than our alpha, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil
 ### Oil effect
+We have inconclusive evidence to conclude that popcorn yield varies by oil type
 
 
 # Checking necessary assumptions
