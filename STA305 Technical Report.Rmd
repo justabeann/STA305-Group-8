@@ -13,6 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
+library(BDEsize)
 ```
 
 ### Objective (Question of Interest)
@@ -34,6 +35,11 @@ pop_data <- read_excel("STA305_FinalProjectData.xlsx")
 attach(pop_data)
 
 table(OIL,KERNEL)
+```
+
+## Sample Size Calculations
+```{r}
+Size.Block(factor.lev=c(3, 4), interaction=FALSE, delta_type=1, delta=c(1, 1, 1), alpha=0.05, beta=0.2)
 ```
 
 Every treatment combination is possible, there are 9 observations in each treatment level, so this is a completed and balanced design, with crossed factor.
