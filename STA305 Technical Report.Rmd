@@ -59,6 +59,17 @@ model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
 anova(model_2)
 ```
 
+### Checking necessary assumptions
+* Normality of the observations (e.g. QQ plot ) 
+* Independence of treatments (checked by the nature of our design)
+* Homogeneity within blocks (checked by the nature of our design)
+* Heterogeneity between blocks  (checked by the nature of our design)
+* Homogeneity of variance between treatment (e.g. residual versus fit plot) 
+
+
+
+
+
   $\gamma_{g}$
 ###where:
    $y_{i}\ is\ $ 
