@@ -86,7 +86,4 @@ anova(model_2)
 
 
 
-
-  $\gamma_{g}$
-###where:
-   $y_{i}\ is\ $ 
+## Conclusion
