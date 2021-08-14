@@ -1,0 +1,64 @@
+---
+title: "STA305 Technical Report"
+author: "Group 8"
+date: "16/08/2021"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+\fontfamily{Arial}
+\fontsize{12}{22}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+```
+
+### Objective (Question of Interest)
+* Which kernel type yields the most popcorn controlling the oil type?
+* Which oil type yields the most popcorn controlling the kernel type?
+* Does the yield of popcorn by kernel type vary depending on the oil used?
+
+Variables
+Predictor variables:
+  Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
+  Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
+Response variable:
+  Yield of popcorn kernels (measured by number of popped kernels)
+Blocking variable: Pot size (small, medium, large)
+
+#### Load the data
+```{r}
+pop_data <- read_excel("STA305_FinalProjectData.xlsx")
+attach(pop_data)
+
+table(OIL,KERNEL)
+```
+
+Every treatment combination is possible, there are 9 observations in each treatment level, so this is a completed and balanced design, with crossed factor.
+
+## Model 1: Interaction and main effect model
+  $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
+  $+ \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + \beta_{6}*[I_{B,i}*I_{2,i}]$
+  $+ \beta_{7}*[I_{C,i}*I_{2,i}] + \beta_{8}*[I_{D,i}*I_{2,i}] +$
+  $\beta_{9}*[I_{B,i}*I_{3,i}] + \beta_{10}*[I_{C,i}*I_{3,i}] +$
+  $\beta_{11}*[I_{D,i}*I_{3,i}] + e_{i}$
+
+### Hypothesis
+  $H_{0}:\beta_{5}=\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0$
+  
+  $H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=5,6,...,11$
+
+### ANOVA
+```{r}
+model_1 <- lm(NUM_POPPED~KERNEL*OIL)
+anova(model_1)
+
+model_2 <- lm(NUM_POPPED~POT+KERNEL*OIL)
+anova(model_2)
+
+```
+
+  $\gamma_{g}$
+###where:
+   $y_{i}\ is\ $ 
