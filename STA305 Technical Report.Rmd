@@ -84,6 +84,8 @@ anova(model_2)
 * Homogeneity of variance between treatment (e.g. residual versus fit plot) 
 
 ```{r}
+par(mfrow=c(2,2))
+
 plot(model_1, 2) #normality of model 1
 plot(model_2, 2) #normality of model 2
 
