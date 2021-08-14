@@ -94,9 +94,12 @@ anova(model_2)
 ## Test Statistic
 
 ### Kernel Effect
-
-### Oile effect
-
+$F= MSkernel/MSE = 18.9818$~$F_{3,100}$
+$p= P (F_{3,100}>F)= 8.058e-10 < 0.05$
+  
+### Oil effect
+$F= MSoil/MSE = 1.110075$~$F_{3,100}$
+$p= P (F_{3,100}>F)= 0.3336> 0.05$
 
 
 
