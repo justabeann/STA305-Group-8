@@ -60,9 +60,11 @@ Size.Block(factor.lev=c(3, 4), interaction=TRUE, delta_type=1, delta=c(1, 1, 1),
 model_1 <- lm(NUM_POPPED~POT+KERNEL*OIL)
 anova(model_1)
 ```
+### Test Statistic
 $F= MSab/MSE = 1.0199$~$F_{6,94}$
 $p= P (F_{6,94}>F)=0.4173 > 0.05$
 
+### Conclusion
 Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Since interaction was not statistically significant, we will need to fit an additive model.
 
 ## Model 2: Additive model
@@ -77,6 +79,10 @@ $H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=1,2,3$
 model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
 anova(model_2)
 ```
+### Test Statistic
+
+### Conclusion
+
 
 ### Checking necessary assumptions
 * Normality of the observations (e.g. QQ plot ) 
