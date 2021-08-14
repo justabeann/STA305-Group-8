@@ -8,6 +8,7 @@ output:
 ---
 \fontfamily{Arial}
 \fontsize{12}{22}
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -51,12 +52,11 @@ Every treatment combination is possible, there are 9 observations in each treatm
 
 ### ANOVA
 ```{r}
-model_1 <- lm(NUM_POPPED~KERNEL*OIL)
+model_1 <- lm(NUM_POPPED~POT+ KERNEL*OIL)
 anova(model_1)
 
-model_2 <- lm(NUM_POPPED~POT+KERNEL*OIL)
+model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
 anova(model_2)
-
 ```
 
   $\gamma_{g}$
