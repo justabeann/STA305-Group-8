@@ -104,6 +104,8 @@ $p= P (F_{3,100}>F)= 0.3336> 0.05$
 
 
 ## Conclusion
+### Kernel Effect
+### Oil effect
 
 
 # Checking necessary assumptions
