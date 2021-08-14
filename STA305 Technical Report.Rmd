@@ -55,23 +55,20 @@ Size.Block(factor.lev=c(3, 4), interaction=TRUE, delta_type=1, delta=c(1, 1, 1),
   $H_{0}:\beta_{5}=\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0$
   
   $H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=5,6,...,11$
-  
+ 
+```{r}
+model_1 <- lm(NUM_POPPED~POT+KERNEL*OIL)
+anova(model_1)
+```
   
 ## Model 2: Additive model
   $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
   $+ \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + e_{i}$
   
-
+$H_{0}:\beta_{1}=\beta_{2}=\beta_{3}=\beta_{4}=\beta_{5}=0$
   
-  
-  
-  
-
-## ANOVA
+$H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=1,...,5$
 ```{r}
-model_1 <- lm(NUM_POPPED~POT + KERNEL*OIL)
-anova(model_1)
-
 model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
 anova(model_2)
 ```
