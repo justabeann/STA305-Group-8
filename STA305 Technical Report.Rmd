@@ -71,7 +71,7 @@ $F= MSab/MSE = 1.0199$~$F_{6,94}$
 $p= P (F_{6,94}>F)=0.4173 > 0.05$
 
 ## Conclusion
-Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Since interaction was not statistically significant, we will need to fit an additive model.
+Since p-value is larger than our alpha, significance level, we fail to reject $H_0$. Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Hence, interaction was not statistically significant and we will thus need to fit an additive model.
 
 # Model 2: Additive model
   $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
@@ -106,7 +106,7 @@ $p= P (F_{2,100}>F)= 0.3336> 0.05$
 ### Kernel Effect
 Since p-value is smaller than our alpha, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil.
 ### Oil effect
-Since p-value is larger than our alpha, significance level, we fail to reject $H_0$.Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type.
+Since p-value is larger than our alpha, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type.
 
 
 # Checking necessary assumptions
