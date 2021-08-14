@@ -16,12 +16,12 @@ library(readxl)
 library(BDEsize)
 ```
 
-### Objective (Question of Interest)
+## Objective (Question of Interest)
 * Which kernel type yields the most popcorn controlling the oil type?
 * Which oil type yields the most popcorn controlling the kernel type?
 * Does the yield of popcorn by kernel type vary depending on the oil used?
 
-Variables
+## Variables
 Predictor variables:
   Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
   Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
@@ -67,7 +67,7 @@ Every treatment combination is possible, there are 9 observations in each treatm
   
   
 
-### ANOVA
+## ANOVA
 ```{r}
 model_1 <- lm(NUM_POPPED~POT + KERNEL*OIL)
 anova(model_1)
