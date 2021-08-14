@@ -67,7 +67,8 @@ model_1 <- lm(NUM_POPPED~POT+KERNEL*OIL)
 anova(model_1)
 ```
 ## Test Statistic
-$F= MSab/MSE = 1.0199$~$F_{6,94}$
+$F= \frac{MSab}{MSE} = 1.0199$~$F_{6,94}$
+
 $p= P (F_{6,94}>F)=0.4173 > 0.05$
 
 ## Conclusion
@@ -94,11 +95,13 @@ anova(model_2)
 ## Test Statistic
 
 ### Kernel Effect
-$F= MSkernel/MSE = 5.7579$~$F_{3,100}$
+$F= \frac{MSkernel}{MSE} = 5.7579$~$F_{3,100}$
+
 $p= P (F_{3,100}>F)= 0.001127 < 0.05$
   
 ### Oil effect
-$F= MSoil/MSE = 0.8720$~$F_{2,100}$
+$F= \frac{MSoil}{MSE} = 0.8720$~$F_{2,100}$
+
 $p= P (F_{2,100}>F)= 0.421257> 0.05$
 
 ## Conclusion
