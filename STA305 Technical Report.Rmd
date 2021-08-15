@@ -183,12 +183,6 @@ Since p-value is larger than our $\alpha$, significance level, we fail to reject
 
 
 # Checking necessary assumptions
-* Normality of the observations (e.g. QQ plot ) 
-* Independence of treatments (checked by the nature of our design)
-* Homogeneity within blocks (checked by the nature of our design)
-* Heterogeneity between blocks  (checked by the nature of our design)
-* Homogeneity of variance between treatment (e.g. residual versus fit plot) 
-
 ```{r, out.width="60%", fig.align='center'}
 par(mfrow=c(2,2))
 
@@ -198,6 +192,17 @@ plot(model_2, 2) #normality of model 2
 plot(model_1,1) #homogeneity of variance model 1
 plot(model_2,1) #homogeneity of variance model 2
 ```
+* Normality of the observations: according to both the QQ plot and the Shapiro-Wilk normality test, p= 0.00037. There is sifficient evidence that the observations are not normally distributed. Therefore, the assumption of normality is violated. This is a limitation of our analysis that we cannot make inference to the population.
+
+* Independence of observation: this assumption is checked by the nature of our experimental design. Each batch of kernel is only given one treatment, and the pots containing the kernels and oil were washed after every single trial, so the result of one batch does not depend on the result of the other batch.
+
+* Homogeneity within blocks: this assumption is checked by the nature of our experimental design. Our blocking variable is the pot size in small, medium and large. The one pot is used to match with one size.
+
+* Heterogeneity between blocks: this assumption is checked by the nature of our experimental design. Our blocking variable is the pot size in small, medium and large. 3 different pots in 3 distinct sizes were used.
+
+* Homogeneity of variance between treatment: according to the residual versus fit graph above, the dots are scattered fairly evenly on the upper- and lower-side of the red line. Therefore, homogeneity of variance is checked.
+
+
 
 # Post Hoc Analysis
 
