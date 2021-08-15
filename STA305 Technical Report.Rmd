@@ -205,7 +205,10 @@ plot(model_2,1) #homogeneity of variance model 2
 ```{r}
 tukeyCIs <- TukeyHSD(aov(model_2),factor=KERNEL,
 conf.level = 0.95)
-plot(tukeyCIs)
 ```
 
+```{r, out.width="60%", fig.align='center'}
+par(mfrow=c(2,2))
+plot(tukeyCIs)
+```
 # Conclusion
