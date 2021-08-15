@@ -101,8 +101,11 @@ $$
 Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Hence, interaction was not statistically significant and we will thus need to fit an additive model.
 
 # Model 2: Additive model
-  $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
-  $+ \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + e_{i}$
+$$
+\begin{aligned}
+y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i} + \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + e_{i}
+\end{aligned}
+$$
 
 ## Hypothesis for Kernel Type
 $H_{0}:\beta_{1}=\beta_{2}=\beta_{3}=0$
