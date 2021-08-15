@@ -63,7 +63,7 @@ Size.Block(factor.lev=c(3, 4), interaction=FALSE, delta_type=1, delta=c(1, 1, 1)
 # Model 1: Interaction and main effect model
 $$
 \begin{aligned}
-   Y_{ijk}=\mu + \alpha_{j} + \beta_{k}+ (\alpha_{j}*\beta_{k})+{\gamma_g}+e_{ijk}
+   Y_{ijk}=\mu + \alpha_{j} + \beta_{k}+ (\alpha_{j}*\beta_{k}) + \gamma_{g} + e_{ijk}
 \end{aligned}
 $$
 
@@ -113,7 +113,7 @@ Since p-value is larger than our $\alpha$, significance level, we fail to reject
 # Model 2: Additive model
 $$
 \begin{aligned}
-   Y_{ijk}=\mu + \alpha_{j} + \beta_{k} + {\gamma_g}+e_{ijk}
+   Y_{ijk}=\mu + \alpha_{j} + \beta_{k} + \gamma_{g}+e_{ijk}
 \end{aligned}
 $$
 
