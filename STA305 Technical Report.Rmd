@@ -199,7 +199,7 @@ pop_data %>% ggplot(aes(x=KERNEL, y=NUM_POPPED, fill=KERNEL)) +
 ```
 
 ### Oil effect
-Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type. To illustrate the empirical distribution and shape of the response by oil type, a violin plot is included below. As we can see, the shape of the data is very similar across all three oil types (especially the safflower and sunflower oils). The boxplots within the violin plots also supports this conclusion. Hence, we can illustratively see that the results of the above statistical inferencing make sense.
+Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type. To illustrate the empirical distribution and shape of the response by oil type, a violin plot is included below. As we can see, the shape of the data is very similar across all three oil types (especially the safflower and sunflower oils). The boxplots within the violin plots also supports this conclusion. Hence, we can illustratively see that the results of the above statistical inferencing makes sense.
 ```{r, out.width="80%", fig.align="center", message = FALSE}
 pop_data %>% ggplot(aes(x=OIL, y=NUM_POPPED, fill=OIL)) +
   geom_violin() +
@@ -216,7 +216,7 @@ pop_data %>% ggplot(aes(x=OIL, y=NUM_POPPED, fill=OIL)) +
 
 
 # Checking necessary assumptions
-```{r, out.width="60%", fig.align='center'}
+```{r, fig.align='center'}
 par(mfrow=c(2,2))
 
 plot(model_1, 2) #normality of model 1
