@@ -23,11 +23,18 @@ library(BDEsize)
 
 # Variables
 Predictor variables:
-  Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
-  Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
+
+* Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
+
+* Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
+
 Response variable:
-  Yield of popcorn kernels (measured by number of popped kernels)
-Blocking variable: Pot size (small, medium, large)
+
+* Yield of popcorn kernels (measured by number of popped kernels)
+
+Blocking variable: 
+
+* Pot size (small, medium, large)
 
 ## Load the data
 ```{r}
