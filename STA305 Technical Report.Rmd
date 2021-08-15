@@ -51,6 +51,20 @@ Size.Block(factor.lev=c(3, 4), interaction=FALSE, delta_type=1, delta=c(1, 1, 1)
 ```
 
 # Model 1: Interaction and main effect model
+
+   $Y_{ijk}=\mu + \alpha_{j} + \beta_{k}+ (\alpha_{j}*\beta_{k})+{\gamma_g}+e_{ijk}$
+
+$\Y_{ijk}$ is the i-th observation from the j-th kernel type and k-th oil type;
+$\mu$ is the grand mean of the popcorn yield;
+$\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean;
+  j=1,2,3,4;
+$\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean; 
+ k=1,2,3
+$\alpha_{j}*\beta_{k}$ is the interaction effect between kernel type and oil type;
+$\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean
+$e_{ijk}$ is random error. We assume $e_{ijk}$ ~ $N(0,\sigma^{2})$
+
+## Dummy Coding Parametrization
   $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
   $+ \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + \beta_{6}*[I_{B,i}*I_{2,i}]$
   $+ \beta_{7}*[I_{C,i}*I_{2,i}] + \beta_{8}*[I_{D,i}*I_{2,i}] +$
@@ -67,12 +81,12 @@ model_1 <- lm(NUM_POPPED~POT+KERNEL*OIL)
 anova(model_1)
 ```
 ## Test Statistic
-$F= \frac{MSab}{MSE} = 1.0199$~$F_{6,94}$
+$F= MSab/MSE = 0.4677$~$F_{6,94}$
 
-$p= P (F_{6,94}>F)=0.4173 > 0.05$
+$p= P (F_{6,94}>F)=0.8307 > 0.05$
 
 ## Conclusion
-Since p-value is larger than our alpha, significance level, we fail to reject $H_0$. Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Hence, interaction was not statistically significant and we will thus need to fit an additive model.
+Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Hence, interaction was not statistically significant and we will thus need to fit an additive model.
 
 # Model 2: Additive model
   $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
@@ -95,14 +109,14 @@ anova(model_2)
 ## Test Statistic
 
 ### Kernel Effect
-$F= \frac{MSkernel}{MSE} = 5.7579$~$F_{3,100}$
+$F= MSkernel/MSE = 18.9785$~$F_{3,100}$
 
-$p= P (F_{3,100}>F)= 0.001127 < 0.05$
+$p= P (F_{3,100}>F)= 8.058*10^{-10} < 0.05$
   
 ### Oil effect
-$F= \frac{MSoil}{MSE} = 0.8720$~$F_{2,100}$
+$F= MSoil/MSE = 1.1098$~$F_{2,100}$
 
-$p= P (F_{2,100}>F)= 0.421257> 0.05$
+$p= P (F_{2,100}>F)= 0.3336> 0.05$
 
 ## Conclusion
 
@@ -130,6 +144,7 @@ plot(model_1,1) #homogeneity of variance model 1
 plot(model_2,1) #homogeneity of variance model 2
 ```
 
+#Post Hoc Analysis
 
 
 # Conclusion
