@@ -2,6 +2,7 @@
 title: "STA305 Technical Report"
 author: "Group 8"
 date: "16/08/2021"
+geometry: margin=2.5cm
 output:
   pdf_document:
     latex_engine: xelatex
@@ -169,7 +170,7 @@ Since p-value is larger than our alpha, significance level, we fail to reject $H
 * Heterogeneity between blocks  (checked by the nature of our design)
 * Homogeneity of variance between treatment (e.g. residual versus fit plot) 
 
-```{r, out.width="70%", fig.align='center'}
+```{r, out.width="60%", fig.align='center'}
 par(mfrow=c(2,2))
 
 plot(model_1, 2) #normality of model 1
