@@ -176,10 +176,10 @@ $$
 ## Conclusion
 
 ### Kernel Effect
-Since p-value is smaller than our alpha, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil.
+Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil.
 
 ### Oil effect
-Since p-value is larger than our alpha, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type.
+Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type.
 
 
 # Checking necessary assumptions
