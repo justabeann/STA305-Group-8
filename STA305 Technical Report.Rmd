@@ -177,7 +177,7 @@ $$
 ## Conclusion
 
 ### Kernel Effect
-Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil. Moreover, to illustrate the empirical distribution and shape of the response by kernel type, a violin plot is included below. As we can see, the baby white kernels appear to lead to more popped kernels than the others. Additionally, the midnight blue kernels appear to result in a lower yield than the others. Hence, the existence of a kernel type effect (as demonstrated in the above statistical test) makes sense.
+Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil. Moreover, to illustrate the empirical distribution and shape of the response by kernel type, a violin plot is included below. As we can see, the baby white kernels appear to lead to more popped kernels than the others. Additionally, the midnight blue kernels appear to result in a lower yield than the others. Hence, the existence of a kernel type effect (as demonstrated in the above statistical test) makes sense. To properly determine (i.e., using statistical inferencing) if the increased baby white yield or the lower midnight blue yields are statistically significant, post-hoc analysis is done in a later section of this report.
 ```{r, out.width="80%", fig.align="center", message = FALSE}
 pop_data %>% ggplot(aes(x=KERNEL, y=NUM_POPPED, fill=KERNEL)) +
   geom_violin() +
