@@ -227,6 +227,7 @@ plot(model_2,1) #homogeneity of variance model 2
 # Post-Hoc Analysis
 
 ## Tukey's HSD Procedure
+Since our ANOVA test only informs us on whether the results were significant or not, but not if these were true, we proceed with a post-hoc analysis to find out which group means are different. Tukey's HSD procedure is applied since our design is balanced and we are interested in all pairwise differences between groups. 
 ```{r}
 tukeyCIs <- TukeyHSD(aov(model_2),factor=KERNEL,
 conf.level = 0.95)
