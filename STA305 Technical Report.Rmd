@@ -207,8 +207,8 @@ tukeyCIs <- TukeyHSD(aov(model_2),factor=KERNEL,
 conf.level = 0.95)
 ```
 
-```{r, out.width="60%", fig.align='center'}
-par(mfrow=c(2,2))
+```{r, fig.dim = c(8, 2), fig.align='center'}
+par(mfrow=c(1, 3))
 plot(tukeyCIs)
 ```
 # Conclusion
