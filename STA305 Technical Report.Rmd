@@ -68,11 +68,13 @@ $$
 * $e_{ijk}$ is random error. We assume $e_{ijk}$ ~ $N(0,\sigma^{2})$
 
 ## Dummy Coding Parametrization
-  $y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i}$
-  $+ \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + \beta_{6}*[I_{B,i}*I_{2,i}]$
-  $+ \beta_{7}*[I_{C,i}*I_{2,i}] + \beta_{8}*[I_{D,i}*I_{2,i}] +$
-  $\beta_{9}*[I_{B,i}*I_{3,i}] + \beta_{10}*[I_{C,i}*I_{3,i}] +$
-  $\beta_{11}*[I_{D,i}*I_{3,i}] + e_{i}$
+$$
+\begin{aligned}
+y_{i} &= \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i} + \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} \\
+&+ \beta_{6}*[I_{B,i}*I_{2,i}] + \beta_{7}*[I_{C,i}*I_{2,i}] + \beta_{8}*[I_{D,i}*I_{2,i}] + \beta_{9}*[I_{B,i}*I_{3,i}] \\
+&+ \beta_{10}*[I_{C,i}*I_{3,i}] + \beta_{11}*[I_{D,i}*I_{3,i}] + e_{i}
+\end{aligned}
+$$
 
 ## Hypothesis:
   $H_{0}:\beta_{5}=\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0$
