@@ -117,9 +117,13 @@ H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=1,2,3
 $$
 
 ## Hypothesis for Oil Type
-$H_{0}:\beta_{4}=\beta_{5}=0$
+$$
+\begin{aligned}
+H_{0} &:\beta_{4}=\beta_{5}=0 \\
   
-$H_{a}:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=4,5$
+H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=4,5
+\end{aligned}
+$$
 
 ```{r}
 model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
