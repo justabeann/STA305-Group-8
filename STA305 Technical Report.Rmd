@@ -180,7 +180,7 @@ $$
 Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil. Moreover, for illustration purposes, we include the following violin plot of the number of popped kernels per kernel type:
 ```{r, out.width="80%", fig.align="center", message = FALSE}
 pop_data %>% ggplot(aes(x=KERNEL, y=NUM_POPPED, fill=KERNEL)) +
-  geom_violin(trim=FALSE) +
+  geom_violin() +
   scale_fill_brewer(palette="Dark2") +
   xlab("") +
   ylab("Number of Popped Kernels") +
