@@ -204,7 +204,7 @@ plot(model_2,1) #homogeneity of variance model 2
 
 
 
-# Post Hoc Analysis
+# Post-Hoc Analysis
 
 ## Tukey's HSD Procedure
 ```{r}
