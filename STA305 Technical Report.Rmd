@@ -81,9 +81,12 @@ model_1 <- lm(NUM_POPPED~POT+KERNEL*OIL)
 anova(model_1)
 ```
 ## Test Statistic
-$F= MSab/MSE = 0.4677$~$F_{6,94}$
-
-$p= P (F_{6,94}>F)=0.8307 > 0.05$
+$$
+\begin{aligned}
+F &= \frac{MSab}{MSE} = 0.4677 \sim F_{6,94}\\
+p &= P (F_{6,94}>F)=0.8307 > 0.05
+\end{aligned}
+$$
 
 ## Conclusion
 Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Hence, interaction was not statistically significant and we will thus need to fit an additive model.
