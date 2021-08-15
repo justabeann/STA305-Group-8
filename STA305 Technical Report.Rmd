@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
 library(BDEsize)
+library(ggplot2)
 ```
 
 # Objective (Question of Interest)
@@ -176,7 +177,26 @@ $$
 ## Conclusion
 
 ### Kernel Effect
-Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil.
+Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil. Moreover, for illustration purposes, we include the following violin plot of the number of popped kernels per kernel type:
+```{r, out.width="60%", fig.align="center}
+ggplot(df, aes(x=KERNEL, y=NUM_POPPED, fill=KERNEL)) +
+  geom_violin(trim=FALSE) +
+  scale_fill_brewer(palette="Dark2") +
+  xlab("") +
+  ylab("Number of Popped Kernels") +
+  labs(title="Violin Plot of Number of Popped Kernels by Kernel Type") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_boxplot(width=0.1) +
+  scale_x_discrete(labels=c("Baby White",
+                           "Ladyfinger",
+                           "Medium White",
+                           "Midnight Blue")) +
+  scale_fill_discrete(name="Kernel Type",
+                      labels=c("Baby White",
+                               "Ladyfinger",
+                               "Medium White",
+                               "Midnight Blue"))
+```
 
 ### Oil effect
 Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type.
