@@ -25,19 +25,19 @@ library(ggplot2)
 * Does the yield of popcorn by kernel type vary depending on the oil used?
 
 # Variables
-Predictor variables:
+* Predictor variables:
 
-* Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
+ * Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
 
-* Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
+ * Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
 
-Response variable:
+* Response variable:
 
-* Yield of popcorn kernels (measured by number of popped kernels)
+ * Yield of popcorn kernels (measured by number of popped kernels)
 
-Blocking variable: 
+* Blocking variable: 
 
-* Pot size (small, medium, large)
+ * Pot size (small, medium, large)
 
 ## Load the data
 ```{r}
@@ -70,14 +70,20 @@ $$
 $$
 
 * $Y_{ijk}$ is the i-th observation from the j-th kernel type and k-th oil type;
+
 * $\mu$ is the grand mean of the popcorn yield;
+
 * $\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean;
   j=1,2,3,4;
+  
 * $\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean; 
   k=1,2,3
+  
 * $\alpha_{j}*\beta_{k}$ is the interaction effect between kernel type and oil type;
+
 * $\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean;
   g=1,2,3,4;
+  
 * $e_{ijk}$ is random error. We assume $e_{ijk}$ ~ $N(0,\sigma^{2})$
 
 ## Dummy Coding Parametrization
@@ -120,13 +126,18 @@ $$
 $$
 
 * $Y_{ijk}$ is the i-th observation from the j-th kernel type and k-th oil type;
+
 * $\mu$ is the grand mean of the popcorn yield;
+
 * $\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean;
   j=1,2,3,4;
+  
 * $\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean; 
   k=1,2,3;
+  
 * $\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean;
   g=1,2,3,4;
+  
 * $e_{ijk}$ is random error. We assume $e_{ijk}$ ~ $N(0,\sigma^{2})$
 
 
