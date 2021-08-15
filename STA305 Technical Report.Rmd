@@ -6,9 +6,10 @@ geometry: margin=2.5cm
 output:
   pdf_document:
     latex_engine: xelatex
+   sansfont: Times New Roman
+   fontsize:12pt
 ---
-\fontfamily{Arial}
-\fontsize{10}{22}
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
