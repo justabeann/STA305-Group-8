@@ -1,92 +1,86 @@
 ---
 title: "STA305 Technical Report"
 author: "Group 8"
-date: "16/08/2021"
+date: "August 16, 2021"
 geometry: margin=2.5cm
 output:
   pdf_document:
     latex_engine: xelatex
-   sansfont: Times New Roman
-   fontsize: 12pt
+sansfont: Times New Roman
+fontsize: 12pt
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-library(readxl)
-library(BDEsize)
-library(ggplot2)
 ```
 
-# Objective (Question of Interest)
-* Which kernel type yields the most popcorn controlling the oil type?
-* Which oil type yields the most popcorn controlling the kernel type?
-* Does the yield of popcorn by kernel type vary depending on the oil used?
+# Libraries
+Before we begin with the report, we note that the following R libraries were used for the analysis:
+```{r, message=FALSE}
+library("readxl") # to read the data
+library("ggplot2") # for plotting
+library("BDEsize") # for sample size calculations
+library("tidyverse") # for coding style
+```
+
+# Objective
+The chief objective of this report is to answer three main questions. First, which type of popcorn kernel yields the most amount of popcorn (defined as having no more than 25% of the kernel hull visible after cooking) when controlling for oil type. The second question of interest is to establish if the type of oil used has an effect on popcorn yield when controlling for kernel type. The final objective of this report is to determine if the yield of popcorn by kernel type varies with the type of oil used.
 
 # Variables
-* Predictor variables:
+The response variable used in this experiment is the number of kernels that popped after cooking. (NB: This is a number out of 100 as each experimental unit is a batch of 100 popcorn kernels.) A kernel was defined as “popped” if, in the opinion of the researcher, no more than 25% of the kernel hull is visible. In addition to the response, there are two predictors of interest. The first is the type of kernel which has four factors: (A) Baby White, (B) Ladyfinger, (C) Medium White, and (D) Midnight Blue. The other factor of interest is the type of oil. This factor has three levels: (1) Canola Oil, (2) Sunflower Oil, and (3) Safflower Oil. Finally, we blocked by pot size. The three sizes of pots were small (surface area of $95.033 \text{ cm}^2$), medium (surface area of $176.715 \text{ cm}^2$), and large (surface area of $314.159 \text{ cm}^2$).
 
- * Kernel type : Baby white (A), Ladyfinger (B), Medium White (C), Midnight blue (D)
-
- * Oil type: Canola oil (1), Sunflower (2), Safflower oil (3)
-
-* Response variable:
-
- * Yield of popcorn kernels (measured by number of popped kernels)
-
-* Blocking variable: 
-
- * Pot size (small, medium, large)
-
-## Load the data
+# Loading the Data
+The below code loads the data into R and displays a table showing each treatment (i.e., and oil-kernel pair) and the number of observations per treatment (nine). It should be noted that, since every treatment combination is realized, the design is complete. Moreover, the nine observations in each treatment level makes the design balanced. Thus, the overall experimental design is a randomized complete block design (RCBD).
 ```{r}
 pop_data <- read_excel("STA305_FinalProjectData.xlsx")
 attach(pop_data)
-
 table(OIL,KERNEL)
 ```
-Every treatment combination is possible, there are 9 observations in each treatment level, so this is a completed and balanced design, with crossed factor.
+
 
 
 # Sample Size Calculations
 
-For the sample size calculations, we will set the probability of a type I error to be 5%, i.e., $P(\text{reject } H_0 \mid H_0 \text{ is true}) = 0.05$. As for the power, we will set the power to be the standard 80% which is to say that the probability of a type II error is set at 20%, i.e., $P(\text{fail to reject } H_0 \mid H_0 \text{ is false}) = 0.2$. Furthermore, detecting small effects requires larger sample sizes. Hence, given the time limitations of the experiment, we will consider detecting only large effects to be suffficient. Given these parameters, the sample size calculations are done in the code below. The minimum sample size required for our RCBD with an interaction term is three batches of popcorn per treatment, per block. In this case, the exact effect sizes are 0.68 for the oil type, 0.69 for the kernel type, and 0.998 for the interaction term. As per Cohen, this corresponds to a medium-large effect for the factors of interest (oil type and kernel type) and a (very) large effect for the interaction term. If interactions are removed from the model, the minimum sample size is reduced to two batches per treatment, per block. In this case, the effect sizes are 0.85 for oil type and 0.87 for the kernel type. Given these results, we will go with a sample size of three batches of popcorn per treatment, per block. Since the oil type factor has three levels and the kernel type factor has four levels, there are 12 treatments. Since each block will get all treatments (and there are three blocks), the total sample size is 108 batches of popcorn (12 treatments times three blocks times three batches per group).
+For the sample size calculations, we will set the probability of a type I error to be 5%, i.e., $P(\text{reject } H_0 \mid H_0 \text{ is true}) = 0.05$. As for the power, we will set the power to be the standard 80% which is to say that the probability of a type II error is set at 20%, i.e., $P(\text{fail to reject } H_0 \mid H_0 \text{ is false}) = 0.2$. Furthermore, detecting small effects requires larger sample sizes. Hence, given the time limitations of the experiment, we will consider detecting only large effects to be sufficient. Given these parameters, the sample size calculations are done in the code below. The minimum sample size required for our RCBD with an interaction term is three batches of popcorn per treatment, per block. In this case, the exact effect sizes are 0.68 for the oil type, 0.69 for the kernel type, and 0.998 for the interaction term. As per Cohen, this corresponds to a medium-large effect for the factors of interest (oil type and kernel type) and a (very) large effect for the interaction term. If interactions are removed from the model, the minimum sample size is reduced to two batches per treatment, per block. In this case, the effect sizes are 0.85 for oil type and 0.87 for the kernel type. Given these results, we will go with a sample size of three batches of popcorn per treatment, per block. Since the oil type factor has three levels and the kernel type factor has four levels, there are 12 treatments. Since each block will get all treatments (and there are three blocks), the total sample size is 108 batches of popcorn (12 treatments times three blocks times three batches per group).
 
-```{r}
+```{r, message=FALSE}
 # With interaction
-Size.Block(factor.lev=c(3, 4), interaction=TRUE, delta_type=1, delta=c(1, 1, 1), 
-  alpha=0.05, beta=0.2)
+Size.Block(factor.lev = c(3, 4),
+           interaction = TRUE,
+           delta_type = 1,
+           delta = c(1, 1, 1),
+           alpha = 0.05,
+           beta = 0.2)
 # Without interaction
-Size.Block(factor.lev=c(3, 4), interaction=FALSE, delta_type=1, delta=c(1, 1, 1), 
-  alpha=0.05, beta=0.2)
+Size.Block(factor.lev = c(3, 4),
+           interaction = FALSE,
+           delta_type = 1,
+           delta = c(1, 1, 1),
+           alpha = 0.05,
+           beta = 0.2)
 ```
 
-# Model 1: Interaction and main effect model
+# Testing for Interactions
+
+## Model 1: The Interaction Model
+The first order of business is to test for an interaction between the type of kernel and the type of oil. To do so, we fit the following interaction and main effects model, which we will call Model 1:
 $$
 \begin{aligned}
-   Y_{ijk}=\mu + \alpha_{j} + \beta_{k}+ (\alpha_{j}*\beta_{k}) + \gamma_{g} + e_{ijk}
+   Y_{ijk}=\mu + \alpha_{j} + \beta_{k}+ (\alpha_{j}*\beta_{k}) + \gamma_{g} + e_{ijk},
 \end{aligned}
 $$
+where
 
 * $Y_{ijk}$ is the i-th observation from the j-th kernel type and k-th oil type;
-
 * $\mu$ is the grand mean of the popcorn yield;
-
-* $\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean;
-  j=1,2,3,4;
-  
-* $\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean; 
-  k=1,2,3
-  
+* $\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean, with $j \in \{1, 2, 3, 4\}$;
+* $\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean, with $k \in \{1, 2, 3\}$;
 * $\alpha_{j}*\beta_{k}$ is the interaction effect between kernel type and oil type;
-
-* $\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean;
-  g=1,2,3,4;
-  
-* $e_{ijk}$ is random error. We assume $e_{ijk}$ ~ $N(0,\sigma^{2})$
+* $\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean, with $g \in \{1, 2, 3\}$;
+* $e_{ijk}$ is random error. We further impose the assumption that $e_t \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
 ## Dummy Coding Parametrization
+Let $I_{x,y}$ be an indicator variable taking the value of one if the observation corresponds to kernel $x$ and oil $y$ (where the values of $x$ and $y$ correspond to the level designations defined in the "Variables" section of this report), and zero otherwise. Then, we construct the following dummy coding parameterization to be used in statistical inferencing:
 $$
 \begin{aligned}
 y_{i} &= \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i} + \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} \\
@@ -96,29 +90,34 @@ y_{i} &= \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i} + \be
 $$
 
 ## Hypothesis:
+In order to test for an interaction between kernel type and oil type, we test the following null hypothesis, $H_0$, against the corresponding alternative hypothesis, $H_a$:
 $$
 \begin{aligned}
-H_{0} &:\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0 \\
-H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=6,...,11
+H_{0} &:\beta_{5}=\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0 \\
+H_{a} &: \exists i \in \{5, 6, \ldots, 11\} \text{ such that } \beta_i \neq 0.
 \end{aligned}
 $$
+To test this hypothesis, we use two-way ANOVA which is done via R immediately below. The results of the ANOVA are also displayed.
 
 ```{r}
-model_1 <- lm(NUM_POPPED~POT+KERNEL*OIL)
+model_1 <- lm(NUM_POPPED ~ POT + KERNEL*OIL)
 anova(model_1)
 ```
-## Test Statistic
-$$
-\begin{aligned}
-F &= \frac{MSab}{MSE} = 0.4677 \sim F_{6,94}\\
-p &= P (F_{6,94}>F)=0.8307 > 0.05
-\end{aligned}
-$$
 
-## Conclusion
-Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Therefore, there is insufficient evidence that popcorn yield by kernel types vary depending on the type of oil used when making popcorn. Hence, interaction was not statistically significant and we will thus need to fit an additive model.
+## Test Statistic and p-Value
+To perform the statistical test, we first need the $F$ test statistic as, under $H_0$, $\frac{MSab}{MSE} \sim F_{6, 94}$. This test statistic is obtained from the above R output and is
+$$
+F = \frac{MSab}{MSE} = 0.4677 \sim F_{6,94}.
+$$
+The $p$-value for this test is then $p = P(F_{6,94} > F) = 0.8307$.
 
-# Model 2: Additive model
+## Conclusion for Interaction Test
+Since the p-value is larger than our significance level, $\alpha = 0.05$, we fail to reject $H_0$ at a 5% significance level. Therefore, there is insufficient evidence that any potential effect of kernel type on popcorn yield varies depending on the type of oil used when making the popcorn. Since the interaction was not statistically significant, we will fit an additive model to test for main effects. This is done in the next section of this report.
+
+# Testing for Main Effects
+
+## Model 2: The Additive model
+To test for main effects (given the statistical insignificance of the interactions in Model 1) we fit the following additive model:
 $$
 \begin{aligned}
    Y_{ijk}=\mu + \alpha_{j} + \beta_{k} + \gamma_{g}+e_{ijk}
@@ -126,70 +125,58 @@ $$
 $$
 
 * $Y_{ijk}$ is the i-th observation from the j-th kernel type and k-th oil type;
-
 * $\mu$ is the grand mean of the popcorn yield;
-
-* $\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean;
-  j=1,2,3,4;
-  
-* $\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean; 
-  k=1,2,3;
-  
-* $\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean;
-  g=1,2,3,4;
-  
-* $e_{ijk}$ is random error. We assume $e_{ijk}$ ~ $N(0,\sigma^{2})$
+* $\alpha_{j}$ is the deviation of the mean of j-th kernel type from the grand mean, with $j \in \{1, 2, 3, 4\}$;
+* $\beta_{k}$ is the deviation of the mean of the k-th oil type from the grand mean, with $k \in \{1, 2, 3\}$;
+* $\gamma_{g}$ is the deviation of the mean of the g-th block (pot size) from the grand mean, with $g \in \{1, 2, 3\}$;
+* $e_{ijk}$ is random error. We further impose the assumption that $e_t \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
 
 ## Dummy Coding Parametrization
+As in the analysis using Model 1, let $I_{x,y}$ be an indicator variable taking the value of one if the observation corresponds to kernel $x$ and oil $y$ (where the values of $x$ and $y$ correspond to the level designations defined in the "Variables" section of this report), and zero otherwise. Then, we construct the following dummy coding parameterization to be used in statistical inferencing:
 $$
 \begin{aligned}
 y_{i} = \beta_{0}+\beta_{1}*I_{B,i}+\beta_{2}*I_{C,i} + \beta_{3}*I_{D,i} + \beta_{4}*I_{2,i} + \beta_{5}*I_{3,i} + e_{i}
 \end{aligned}
 $$
 
-## Hypothesis for Kernel Type
+## Hypotheses
+In order to test for a kernel type effect, we test the following null hypothesis, $H_0$, against the corresponding alternative hypothesis, $H_a$:
 $$
 \begin{aligned}
 H_{0} &:\beta_{1}=\beta_{2}=\beta_{3}=0 \\
-H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=1,2,3
+H_{a} &: \exists i \in \{1, 2, 3\} \text{ such that } \beta_i \neq 0.
 \end{aligned}
 $$
-
-## Hypothesis for Oil Type
+To test for an oil type effect, we test the following null hypothesis, $H_0$, against the corresponding alternative hypothesis, $H_a$:
 $$
 \begin{aligned}
 H_{0} &:\beta_{4}=\beta_{5}=0 \\ 
-H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=4,5
+H_{a} &: \beta_4 \neq 0 \vee \beta_5 \neq 0
 \end{aligned}
 $$
+To test this hypothesis, we use an ANOVA which is done via R immediately below. The results of the ANOVA are also displayed.
 
 ```{r}
-model_2 <- lm(NUM_POPPED~POT + KERNEL+OIL)
+model_2 <- lm(NUM_POPPED~POT + KERNEL + OIL)
 anova(model_2)
 ```
+
 ## Test Statistic
+To test the significance of kernel type, we first need the $F$ test statistic as, under $H_0$, $\frac{MS\text{kernel}}{MSE} \sim F_{3, 100}$. This test statistic is obtained from the above R output and is
+$$
+F_\text{kernel} = \frac{MSkernel}{MSE} = 18.9785 \sim F_{3,100}.
+$$
+The corresponding $p$-value is therefore $p_\text{kernel} = P (F_{3,100}>F)= 8.058\times10^{-10}$. For the significance test re oil type, the $F$ statistic is
+$$
+F_\text{oil} = \frac{MSoil}{MSE} = 1.1098 \sim F_{2,100}
+$$
+and the $p$-value is $p_\text{oil} = P (F_{2,100}>F)= 0.3336$.
+
+## Conclusions for Main Effects Tests
 
 ### Kernel Effect
-$$
-\begin{aligned}
-F &= \frac{MSkernel}{MSE} = 18.9785 \sim F_{3,100}\\
-p &= P (F_{3,100}>F)= 8.058\times10^{-10} < 0.05
-\end{aligned}
-$$
-  
-### Oil effect
-$$
-\begin{aligned}
-F &= \frac{MSoil}{MSE} = 1.1098 \sim F_{2,100}\\
-p &= P (F_{2,100}>F)= 0.3336 > 0.05
-\end{aligned}
-$$
-
-## Conclusion
-
-### Kernel Effect
-Since p-value is smaller than our $\alpha$, significance level, we reject $H_0$. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for oil. Moreover, to illustrate the empirical distribution and shape of the response by kernel type, a violin plot is included below. As we can see, the baby white kernels appear to lead to more popped kernels than the others. Additionally, the midnight blue kernels appear to result in a lower yield than the others. Hence, the existence of a kernel type effect (as demonstrated in the above statistical test) makes sense. To properly determine (i.e., using statistical inferencing) if the increased baby white yield or the lower midnight blue yields are statistically significant, post-hoc analysis is done in a later section of this report.
+Since the p-value is smaller than our significance level, $\alpha = 0.05$, we reject $H_0$ at a 5% significance level. Therefore, we have strong evidence to conclude that kernel type affects popcorn yield when controlling for the type of oil. Moreover, to illustrate the empirical distribution and shape of the response (popcorn yield) by kernel type, a violin plot is included below. As we can see, the Baby White kernels appear to lead to more popped kernels than the others. Additionally, the Midnight Blue kernels appear to result in a lower yield than the others. Hence, the existence of a kernel type effect (as demonstrated in the above statistical test) makes sense. To formally determine (i.e., using statistical inferencing) if the increased Baby White yields or the lower Midnight Blue yields are statistically significant, a post-hoc analysis must be done. We do such an analysis in a later section of this report.
 ```{r, out.width="80%", fig.align="center", message = FALSE}
 pop_data %>% ggplot(aes(x=KERNEL, y=NUM_POPPED, fill=KERNEL)) +
   geom_violin() +
@@ -210,8 +197,8 @@ pop_data %>% ggplot(aes(x=KERNEL, y=NUM_POPPED, fill=KERNEL)) +
                                "Midnight Blue"))
 ```
 
-### Oil effect
-Since p-value is larger than our $\alpha$, significance level, we fail to reject $H_0$. Hence, we have inconclusive evidence to conclude that popcorn yield varies by oil type. To illustrate the empirical distribution and shape of the response by oil type, a violin plot is included below. As we can see, the shape of the data is very similar across all three oil types (especially the safflower and sunflower oils). The boxplots within the violin plots also supports this conclusion. Hence, we can illustratively see that the results of the above statistical inferencing makes sense.
+### Oil Effect
+Since the p-value is larger than our significance level, $\alpha = 0.05$, we fail to reject $H_0$ at a 5% significance level. Hence, we do not have evidence to conclude that popcorn yield varies by oil type. To illustrate the empirical distribution and shape of the response by oil type, a violin plot is included below. As we can see, the shape of the data is very similar across all three oil types (especially the safflower and sunflower oils). The boxplots within the violin plots also supports this conclusion. Hence, we can illustratively see that the results of the above statistical inferencing make sense.
 ```{r, out.width="80%", fig.align="center", message = FALSE}
 pop_data %>% ggplot(aes(x=OIL, y=NUM_POPPED, fill=OIL)) +
   geom_violin() +
@@ -227,43 +214,67 @@ pop_data %>% ggplot(aes(x=OIL, y=NUM_POPPED, fill=OIL)) +
 ```
 
 
-# Checking necessary assumptions
+# Checking Necessary Assumptions
+In our analysis, we made the assumption that the residuals were iid Gaussian with mean zero and constant variance. We will now asses the validity of these assumptions.
 ```{r, fig.align='center'}
 par(mfrow=c(2,2))
-
 plot(model_1, 2) #normality of model 1
 plot(model_2, 2) #normality of model 2
-
 plot(model_1,1) #homogeneity of variance model 1
 plot(model_2,1) #homogeneity of variance model 2
 ```
-* Normality of the observations: according to both the QQ plot and the Shapiro-Wilk normality test, p= 0.00037. There is sifficient evidence that the observations are not normally distributed. Therefore, the assumption of normality is violated. This is a limitation of our analysis that we cannot make inference to the population.
+To test the assumption that the residuals are normally distributed, we can first examine the normal Q-Q plots. For the interaction model (Model 1) the Q-Q plot of its residuals is in the top left corner of the above figure. It appears to deviate from a straight line which suggests this assumption might be violated. To formally test this, however, we pereform a Shapiro-Wilk test below. The null hypothesis is that the residuals are normally distributed. The corresponing $p$-value is 0.002012 which is much less than 0.05. Hence, at a 5% significance level, we must reject the null hypothesis and therefore have strong evidence that the residuals are not Gaussian.
+```{r}
+model_1 %>%
+  resid() %>%
+  shapiro.test()
+```
+As for the additive model (Model 2), its Q-Q plot (top right) also appears to deviate from normality. We alo conduct a Shapiro-Wilk test which returns a $p$-value of 0.0003664. As this is much less than 0.05, we must, at a 5% significance level, reject the null hypothesis and therefore have strong evidence that the residuals are not Gaussian.
+```{r}
+model_2 %>%
+  resid() %>%
+  shapiro.test()
+```
+Given that the residuals are not normally distributed, we are unable to make inferences about population-level parameters. To do so, further analysis would have to be done using a different distributional assumption on the residuals or perhaps a transformation. We do not conduct such an analysis in this report.
 
-* Independence of observation: this assumption is checked by the nature of our experimental design. Each batch of kernel is only given one treatment, and the pots containing the kernels and oil were washed after every single trial, so the result of one batch does not depend on the result of the other batch.
 
-* Homogeneity within blocks: this assumption is checked by the nature of our experimental design. Our blocking variable is the pot size in small, medium and large. The one pot is used to match with one size.
+The next assumption that must be checked is the homoscedasticity of the residuals. To check this assumption, we will look at plots of the residuals versus the fitted values. Such a plot for Model 1 is in the bottom left quadrant of the above figure. From this figure, we see that the dots are scattered fairly evenly on the upper- and lower-side of the red line which suggests that the residuals are homoscedastic. Thus, we will consider this assumption to be valid for Model 1. For Model 2, its residual plot is in the bottom right quadrant of the above figure. Like the plot for Model 1, the dots are scattered fairly evenly on the upper- and lower-side of the red line which suggests that the residuals are homoscedastic. Hence, we will consider this assumption to be valid for Model 2.
 
-* Heterogeneity between blocks: this assumption is checked by the nature of our experimental design. Our blocking variable is the pot size in small, medium and large. 3 different pots in 3 distinct sizes were used.
 
-* Homogeneity of variance between treatment: according to the residual versus fit graph above, the dots are scattered fairly evenly on the upper- and lower-side of the red line. Therefore, homogeneity of variance is checked.
-
+As far as the assumption of observational independence, this assumption is verefied through the nature of our experimental design. Each batch of kernel is only given one treatment, and the pots containing the kernels and oil were washed after every single trial (and allowed to cool to room temperature) and so the result of one batch does not depend on the result of any other batch. Also verefied through the nature of our experimental design is the implicit assumption of homogeneity within blocks. Since the brand of kernel, temperature, cooking method, pots, etc. were controlled, it is reasonable to conclude that batches within a block (i.e., batches using the same pot size) are homogeneous. Finally, the implicit assumption of heterogeneity between blocks is checked by the below violin plots. From this figure, it appears as though the small pot lead to smaller yields of popcorn than the other two. Moreover, the empirical distributions are such that the larger pot had more batches resulting in lower yields than the medium pot. We will use this as confirmation that there is heterogeneity between blocks.
+```{r, out.width="80%", fig.align="center", message = FALSE}
+pop_data %>% ggplot(aes(x=POT, y=NUM_POPPED, fill=POT)) +
+  geom_violin() +
+  scale_fill_brewer(palette="Dark2") +
+  xlab("") +
+  ylab("Number of Popped Kernels") +
+  labs(title="Violin Plot of Number of Popped Kernels by Block (Pot Size)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_boxplot(width=0.1) +
+  scale_x_discrete(labels=c("Large", "Medium", "Small")) +
+  scale_fill_discrete(name="Block (Pot Size)",
+                      labels=c("Large", "Medium", "Small"))
+```
 
 
 # Post-Hoc Analysis
 
-## Tukey's HSD Procedure
-Since our ANOVA test only informs us on whether the results were significant or not, but not if these were true, we proceed with a post-hoc analysis to find out which group means are different. Tukey's HSD procedure is applied since our design is balanced and we are interested in all pairwise differences between groups. 
-```{r}
-tukeyCIs <- TukeyHSD(aov(model_2),factor=KERNEL, conf.level = 0.95)
-tukeyCIs$KERNEL
-```
-## Conclusion
-According to the results of the Tukey's HSD on the kernel type, we have strong evidence to conclude that baby white yields more popcorn than ladyfinger ($p=7.64*10^{-5}$), baby white yields more popcorn than midnight blue ($p=5.82*10^{-10}$), and medium white yields more popcorn than midnight blue ($p=5.44*10^{-5}$). In addition, we have mild evidence that lady finger yields more popcorn than midnight blue ($p=0.0406$). On the other hand, we do not have sufficient evidence that popcorn yield varies between baby white and medium white. We also have insufficient evidence that medium white and ladyfinger yield differently (both $p's > .05$).
+## Tukey's Honestly Significant Difference (HSD) Procedure
+Our ANOVA tests only inform us as to whether the results were significant or not. Since the kernel type is the only significant factor, we will conduct a post-hoc analysis to determine differences in the average popcorn yield between kernel types. As we have a balanced design and are interested in all pairwise comparisons (which allows us to answer the question of which kernel type is best), we employ Tukey's HSD procedure (on the additive model, Model 2) in our post-hoc analysis. In doing so, we compute 95% confidence intervals as follows:
 
+```{r}
+tukeyCIs <- TukeyHSD(aov(model_2), factor = KERNEL, conf.level = 0.95)
+tukeyCIs
+```
+According to the results of Tukey's HSD tests on kernel type, we have strong evidence to conclude that Baby White yields more popcorn than Ladyfinger ($p=7.64*10^{-5}$), Baby White yields more popcorn than Midnight Blue ($p=5.82*10^{-10}$), and Medium White yields more popcorn than Midnight Blue ($p=5.44*10^{-5}$). In addition, we have mild evidence that Ladyfinger yields more popcorn than Midnight Blue ($p=0.0406$). On the other hand, we do not have sufficient evidence to conclude that popcorn yield varies between Baby White and Medium White. We also have insufficient evidence that Medium White and Ladyfinger yield different amounts of popcorn (both $p$ values are greater than 0.05). (NB: It should be noted that in the above, the null hypothesis is always that the two groups have the same average popcorn yiedls and the alternative hypothesis is that they do not.)
+
+
+For illustrative purposes, we also plot the intervals:
 ```{r, fig.dim = c(8, 2), fig.align='center'}
 par(mfrow=c(1, 3))
 plot(tukeyCIs)
 ```
 
 # Final Conclusion
-Overall, the use of canola, sunflower or safflower oil do not have an impact on the yield of the popcorn. There is evidence that the yield varies by the kernel types. Out of the 4 kernel types we tested, midnight blue yielded the least kernel, ladyfinger yield came to the second last. There baby white and medium white yielded similarly. There is no sufficient evidence that a particular kernel yield more popcorn combining with a particular oil type.
+Overall, the type of oil used (in this case, canola, sunflower, and safflower) does not have an impact on the yield of popcorn. However, there is evidence that the yield varies by kernel type. Out of the 4 kernel types we tested, Midnight Blue yielded the least amount of popcorn while Ladyfinger yielded the second least amount of popcorn. Baby White and Medium White yielded similar amounts. Finally, we found no sufficient evidence that a particular kernel type yield more popcorn when combined with a particular type of oil.
+
