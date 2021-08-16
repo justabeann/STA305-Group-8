@@ -98,8 +98,8 @@ $$
 ## Hypothesis:
 $$
 \begin{aligned}
-H_{0} &:\beta_{5}=\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0 \\
-H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=5,6,...,11
+H_{0} &:\beta_{6}=\beta_{7}=\beta_{8}=\beta_{9}=\beta_{10}=\beta_{11}=0 \\
+H_{a} &:\ at\ least\ one\ \beta_{k} \ne 0,\ for\ k=6,...,11
 \end{aligned}
 $$
 
