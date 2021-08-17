@@ -1,0 +1,16 @@
+---
+title: "STA305 Final Report"
+author: "Group 8"
+date: "23/08/2021"
+output: 
+   pdf_document:
+    latex_engine: xelatex
+    sansfont: Times New Roman
+    fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
