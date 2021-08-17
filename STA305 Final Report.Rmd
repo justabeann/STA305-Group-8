@@ -36,3 +36,10 @@ library(tidyverse)
 
 # Conclusion
 
+
+
+# Appendix A
+## Raw data
+
+# Appendix B
+## Code
