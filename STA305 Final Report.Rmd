@@ -14,3 +14,25 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+# Description of Case Study
+
+
+
+# Description of the Experimental Design
+
+
+
+# Data Analysis
+
+
+
+# Other Relevant Information
+
+
+
+# Limitations
+
+
+
+# Conclusion
+
