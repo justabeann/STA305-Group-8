@@ -2,6 +2,7 @@
 title: "STA305 Final Report"
 author: "Group 8"
 date: "23/08/2021"
+geometry: margin=2.5cm
 output: 
    pdf_document:
     latex_engine: xelatex
